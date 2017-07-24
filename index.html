@@ -11,10 +11,15 @@
 </head>
 <body>
   <svg id="henosis">
-    <circle cx="20" cy="20" r="20" stroke="yellow" stroke-width="0" fill="yellow" />
+    <filter id="blurMe" x="-10" y="-10" width="20" height="20">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+    <circle id="shadow" cx="30" cy="30" r="20" fill="grey" filter="url(#blurMe)" />
+    <circle cx="30" cy="30" r="20" stroke="yellow" stroke-width="0" fill="white" />
   </svg>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="js/henosis.js"></script>
+  <script src="js/changeShadowOfSVGElement.js"></script>
 </body>
 </html>
