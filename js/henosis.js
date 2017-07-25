@@ -14,7 +14,7 @@ $( function() {
     // update coordinates manually, since top/left style props don't work on SVG
     event.target.setAttribute('cx', leftPosition);
     event.target.setAttribute('cy', topPosition);
-    changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 0.2, 0.005, "henosis", "shadow");
+    changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
   });
 } );
 }).resize();
