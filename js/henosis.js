@@ -1,3 +1,4 @@
+$(window).on("resize", function () {
 $( function() {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
@@ -16,3 +17,4 @@ $( function() {
     changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 0.2, 0.005, "henosis", "shadow");
   });
 } );
+}).resize();
