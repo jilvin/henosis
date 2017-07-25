@@ -47,6 +47,7 @@ function changeShadowOfSVGElement(x1, y1, z1, z2, element1Identifier, element2Id
 
       //x coordinate of shadow set here.
       document.getElementById(element2Identifier).setAttribute("cy", yShadow);
+
     }
     else
     {
