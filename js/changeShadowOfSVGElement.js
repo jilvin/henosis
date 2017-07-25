@@ -34,7 +34,7 @@ function changeShadowOfSVGElement(x1, y1, z1, z2, element1Identifier, element2Id
       var xObject = document.getElementById(element1Identifier).getAttribute("cx");
 
       //Calculate x coordinate of the shadow.
-      var xShadow = (xObject-(x1-xObject));
+      var xShadow = (parseFloat(xObject) + ((xObject - x1) * (z2 / z1)));
 
       //x coordinate of shadow set here.
       document.getElementById(element2Identifier).setAttribute("cx", xShadow);
@@ -43,7 +43,7 @@ function changeShadowOfSVGElement(x1, y1, z1, z2, element1Identifier, element2Id
       var yObject = document.getElementById(element1Identifier).getAttribute("cy");
 
       //Calculate x coordinate of the shadow.
-      var yShadow = (yObject-(y1-yObject));
+      var yShadow = (parseFloat(yObject) + ((yObject - y1) * (z2 / z1)));
 
       //x coordinate of shadow set here.
       document.getElementById(element2Identifier).setAttribute("cy", yShadow);
