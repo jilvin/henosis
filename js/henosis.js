@@ -76,7 +76,7 @@ function henosisActCircleScaleUpAct(maxValue)
     var windowWidth = $(window).width();
     if(radius<maxValue)
     {
-      document.getElementById("actCircle").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/15));
+      document.getElementById("actCircle").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/30));
       changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "actCircle", "actCircleShadow");
       henosisActCircleScaleUpAct(maxValue);
     }
