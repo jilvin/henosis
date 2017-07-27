@@ -1,3 +1,30 @@
+var svgNS = "http://www.w3.org/2000/svg";
+
+function createActCircle(cx, cy)
+{
+    var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
+    myCircle.setAttributeNS(null,"id","actCircle");
+    myCircle.setAttributeNS(null,"cx",cx);
+    myCircle.setAttributeNS(null,"cy",cy);
+    myCircle.setAttributeNS(null,"r",20);
+    myCircle.setAttributeNS(null,"fill","white");
+    myCircle.setAttributeNS(null,"stroke","none");
+    myCircle.setAttributeNS(null,"style","opacity: 1;");
+    document.getElementById("henosisLayer").appendChild(myCircle);
+}
+
+function createActCircleShadow(cx, cy)
+{
+    var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
+    myCircle.setAttributeNS(null,"id","actCircleShadow");
+    myCircle.setAttributeNS(null,"cx",cx);
+    myCircle.setAttributeNS(null,"cy",cy);
+    myCircle.setAttributeNS(null,"r",20);
+    myCircle.setAttributeNS(null,"fill","grey");
+    myCircle.setAttributeNS(null,"stroke","none");
+    document.getElementById("henosisLayer").appendChild(myCircle);
+}
+
 function setHenosisAtCentre()
 {
   var windowHeight = $(window).height();
@@ -7,17 +34,43 @@ function setHenosisAtCentre()
   changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
 }
 
-function henosisScaleUpAct(maxValue)
+function reduceOpacity()
 {
   setTimeout(function () {
-    var radius = document.getElementById("henosis").getAttribute('r');
+    var opacity = document.getElementById("actCircle").style.opacity;
+    if(opacity>0)
+    {
+      document.getElementById("actCircle").style.opacity = (parseFloat(opacity)-parseFloat(0.1));
+      reduceOpacity();
+    }
+    else
+    {
+      document.getElementById("actCircle").remove();
+    }
+  }, 100);
+}
+
+function scaleUpActComplete()
+{
+  document.getElementById("actCircleShadow").remove();
+  reduceOpacity();
+}
+
+function henosisActCircleScaleUpAct(maxValue)
+{
+  setTimeout(function () {
+    var radius = document.getElementById("actCircle").getAttribute('r');
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
     if(radius<maxValue)
     {
-      document.getElementById("henosis").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/15));
-      changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
-      henosisScaleUpAct(maxValue);
+      document.getElementById("actCircle").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/15));
+      changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "actCircle", "actCircleShadow");
+      henosisActCircleScaleUpAct(maxValue);
+    }
+    else
+    {
+      scaleUpActComplete();
     }
   }, 10);
 }
@@ -27,7 +80,12 @@ function henosisScaleUpActStart()
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
   var diagonalLength = Math.sqrt((windowWidth*windowWidth)+(windowHeight*windowHeight));
-  henosisScaleUpAct(diagonalLength);
+  var cx = document.getElementById("henosis").getAttribute('cx');
+  var cy = document.getElementById("henosis").getAttribute('cy');
+  createActCircleShadow(cx, cy);
+  createActCircle(cx, cy);
+  changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "actCircle", "actCircleShadow");
+  henosisActCircleScaleUpAct(diagonalLength);
 }
 
 setHenosisAtCentre();
