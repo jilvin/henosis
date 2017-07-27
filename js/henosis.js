@@ -39,3 +39,32 @@ $( function() {
     changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
   });
 } );
+
+// pageloading part -- start
+var colors = new Array( "Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red");
+var colornow=0;
+
+function changeBackground(color) {
+  //  document.body.style.background = color;
+   document.getElementById("henosis").setAttribute('fill', color);
+}
+
+function incrementcolor() {
+	if(colornow==6) {
+		colornow=0;
+	}
+	else {
+		colornow++;
+	}
+}
+
+function loopLi() {
+setTimeout(function () {
+     changeBackground(colors[colornow]);
+	incrementcolor();
+	loopLi();
+}, 1000);
+}
+
+loopLi();
+// pageloading part -- end
