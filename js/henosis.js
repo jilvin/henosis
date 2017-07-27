@@ -4,27 +4,27 @@ var possibleDisplays = 2;
 
 function createActCircle(cx, cy)
 {
-    var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
-    myCircle.setAttributeNS(null,"id","actCircle");
-    myCircle.setAttributeNS(null,"cx",cx);
-    myCircle.setAttributeNS(null,"cy",cy);
-    myCircle.setAttributeNS(null,"r",20);
-    myCircle.setAttributeNS(null,"fill","white");
-    myCircle.setAttributeNS(null,"stroke","none");
-    myCircle.setAttributeNS(null,"style","opacity: 1;");
-    document.getElementById("henosisLayer").appendChild(myCircle);
+  var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
+  myCircle.setAttributeNS(null,"id","actCircle");
+  myCircle.setAttributeNS(null,"cx",cx);
+  myCircle.setAttributeNS(null,"cy",cy);
+  myCircle.setAttributeNS(null,"r",20);
+  myCircle.setAttributeNS(null,"fill","white");
+  myCircle.setAttributeNS(null,"stroke","none");
+  myCircle.setAttributeNS(null,"style","opacity: 1;");
+  document.getElementById("henosisLayer").appendChild(myCircle);
 }
 
 function createActCircleShadow(cx, cy)
 {
-    var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
-    myCircle.setAttributeNS(null,"id","actCircleShadow");
-    myCircle.setAttributeNS(null,"cx",cx);
-    myCircle.setAttributeNS(null,"cy",cy);
-    myCircle.setAttributeNS(null,"r",20);
-    myCircle.setAttributeNS(null,"fill","grey");
-    myCircle.setAttributeNS(null,"stroke","none");
-    document.getElementById("henosisLayer").appendChild(myCircle);
+  var myCircle = document.createElementNS(svgNS,"circle"); //to create a circle. for rectangle use "rectangle"
+  myCircle.setAttributeNS(null,"id","actCircleShadow");
+  myCircle.setAttributeNS(null,"cx",cx);
+  myCircle.setAttributeNS(null,"cy",cy);
+  myCircle.setAttributeNS(null,"r",20);
+  myCircle.setAttributeNS(null,"fill","grey");
+  myCircle.setAttributeNS(null,"stroke","none");
+  document.getElementById("henosisLayer").appendChild(myCircle);
 }
 
 function setHenosisAtCentre()
@@ -57,6 +57,13 @@ function reduceOpacity()
     else
     {
       document.getElementById("actCircle").remove();
+      if (document.getElementById("henosis").addEventListener) {  // all browsers except IE before version 9
+        document.getElementById("henosis").addEventListener("click", henosisScaleUpActStart, false);
+      } else {
+        if (document.getElementById("henosis").attachEvent) {   // IE before version 9
+          document.getElementById("henosis").attachEvent("click", henosisScaleUpActStart);
+        }
+      }
     }
   }, 100);
 }
