@@ -7,6 +7,29 @@ function setHenosisAtCentre()
   changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
 }
 
+function henosisScaleUpAct(maxValue)
+{
+  setTimeout(function () {
+    var radius = document.getElementById("henosis").getAttribute('r');
+    var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+    if(radius<maxValue)
+    {
+      document.getElementById("henosis").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/15));
+      changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
+      henosisScaleUpAct(maxValue);
+    }
+  }, 10);
+}
+
+function henosisScaleUpActStart()
+{
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+  var diagonalLength = Math.sqrt((windowWidth*windowWidth)+(windowHeight*windowHeight));
+  henosisScaleUpAct(diagonalLength);
+}
+
 setHenosisAtCentre();
 
 // See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
@@ -69,6 +92,7 @@ function loopLi() {
     else
     {
       document.getElementById("henosis").setAttribute('fill', "white");
+      henosisScaleUpActStart();
     }
   }, 1000);
 }
