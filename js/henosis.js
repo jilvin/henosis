@@ -42,29 +42,43 @@ $( function() {
 
 // pageloading part -- start
 var colors = new Array( "Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red");
-var colornow=0;
-
+var colornow=1;
+var loopStop=0;
 function changeBackground(color) {
   //  document.body.style.background = color;
-   document.getElementById("henosis").setAttribute('fill', color);
+  document.getElementById("henosis").setAttribute('fill', color);
 }
 
 function incrementcolor() {
-	if(colornow==6) {
-		colornow=0;
-	}
-	else {
-		colornow++;
-	}
+  if(colornow==6) {
+    colornow=0;
+  }
+  else {
+    colornow++;
+  }
 }
 
 function loopLi() {
-setTimeout(function () {
-     changeBackground(colors[colornow]);
-	incrementcolor();
-	loopLi();
-}, 1000);
+  setTimeout(function () {
+    changeBackground(colors[colornow]);
+    incrementcolor();
+    if(loopStop==0)
+    {
+      loopLi();
+    }
+    else
+    {
+      document.getElementById("henosis").setAttribute('fill', "white");
+    }
+  }, 1000);
 }
 
 loopLi();
 // pageloading part -- end
+
+// pageloaded -- start
+$(window).on('load', function()
+{
+  loopStop=1;
+});
+// pageloaded -- end
