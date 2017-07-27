@@ -1,4 +1,6 @@
 var svgNS = "http://www.w3.org/2000/svg";
+var displayNow = 0;
+var possibleDisplays = 2;
 
 function createActCircle(cx, cy)
 {
@@ -34,6 +36,15 @@ function setHenosisAtCentre()
   changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
 }
 
+function displayToggle()
+{
+  if(displayNow==0)
+  {
+    displayNow++;
+    document.getElementById("container"+displayNow).style.display = "block";
+  }
+}
+
 function reduceOpacity()
 {
   setTimeout(function () {
@@ -53,6 +64,7 @@ function reduceOpacity()
 function scaleUpActComplete()
 {
   document.getElementById("actCircleShadow").remove();
+  displayToggle();
   reduceOpacity();
 }
 
@@ -88,7 +100,16 @@ function henosisScaleUpActStart()
   henosisActCircleScaleUpAct(diagonalLength);
 }
 
-setHenosisAtCentre();
+function displayNone()
+{
+  document.getElementById("container1").style.display = "none";
+  document.getElementById("container2").style.display = "none";
+}
+
+function start(){
+  displayNone();
+  setHenosisAtCentre();
+}
 
 // See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
 //refresh page on browser resize
@@ -164,3 +185,5 @@ $(window).on('load', function()
   loopStop=1;
 });
 // pageloaded -- end
+
+start();
