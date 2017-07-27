@@ -43,6 +43,18 @@ function displayToggle()
     displayNow++;
     document.getElementById("container"+displayNow).style.display = "block";
   }
+  else if(displayNow == possibleDisplays)
+  {
+    document.getElementById("container"+displayNow).style.display = "none";
+    displayNow = 1;
+    document.getElementById("container"+displayNow).style.display = "block";
+  }
+  else
+  {
+    document.getElementById("container"+displayNow).style.display = "none";
+    displayNow++;
+    document.getElementById("container"+displayNow).style.display = "block";
+  }
 }
 
 function reduceOpacity()
