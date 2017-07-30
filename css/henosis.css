@@ -3,8 +3,10 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
+  /*Remove margin style definition if Bootstrap is used. -- start*/
   margin-left: -8px;
   margin-top: -8px;
+  /*Remove margin style definition if Bootstrap is used. -- end*/
   z-index: 10;
 }
 

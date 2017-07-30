@@ -5,6 +5,10 @@ See:
 
 https://jilvin.github.io/henosis/
 
+## Usage
+Remove or comment margin style definition from henosis.css if Bootstrap is used.
+
+
 ## Contribution
 Contributions and suggestions are always welcome.
 
