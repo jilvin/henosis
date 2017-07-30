@@ -47,10 +47,11 @@ $( function() {
   $('#henosis').draggable({
     containment: [ 0, 0, windowWidth-40, windowHeight-40]
   })
-  .bind('mousedown', function(event, ui){
-    // bring target to front
-    $(event.target.parentElement).append( event.target );
-  }).bind('drag', function(event, ui){
+  // .bind('mousedown', function(event, ui){
+  //   // bring target to front
+  //   $(event.target.parentElement).append( event.target );
+  // })
+  .bind('drag', function(event, ui){
 
     var ua = navigator.userAgent.toLowerCase();
     var isChromium = ua.indexOf("chromium") > -1; //&& ua.indexOf("mobile");
@@ -159,7 +160,8 @@ function reduceOpacity()
       if (document.getElementById("henosis").addEventListener)
       {
         // all browsers except IE before version 9
-        document.getElementById("henosis").addEventListener("click", henosisScaleUpActStart, false);
+        // $('#henosis').off('click');
+        document.getElementById("henosis").addEventListener("click", henosisScaleUpActStart, true);
       }
       else
       {
