@@ -54,9 +54,9 @@ $( function() {
   .bind('drag', function(event, ui){
 
     var ua = navigator.userAgent.toLowerCase();
-    var isChromium = ua.indexOf("chromium") > -1; //&& ua.indexOf("mobile");
+    var isAppleWebKit = ua.indexOf("applewebkit") > -1;
 
-    if(isChromium)
+    if(isAppleWebKit)
     {
 
       var leftPosition = ui.position.left + 20;
