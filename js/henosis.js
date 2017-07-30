@@ -1,3 +1,11 @@
+// Global Variables Declaration -- start
+
+var svgNS = "http://www.w3.org/2000/svg";
+var displayNow = 0;
+var possibleDisplays = 2;
+
+// Global Variables Declaration -- end
+
 // Code used for start up -- start
 
 function displayNone()
@@ -89,10 +97,6 @@ $(window).bind('resize', function(e)
 // Code used for page refresh -- end
 
 // Code for scaleUpAct and for switching containers -- start
-
-var svgNS = "http://www.w3.org/2000/svg";
-var displayNow = 0;
-var possibleDisplays = 2;
 
 function createActCircle(cx, cy)
 {
