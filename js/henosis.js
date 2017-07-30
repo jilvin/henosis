@@ -1,3 +1,95 @@
+// Code used for start up -- start
+
+function displayNone()
+{
+
+  document.getElementById("container1").style.display = "none";
+  document.getElementById("container2").style.display = "none";
+
+}
+
+function setHenosisAtCentre()
+{
+
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+  document.getElementById("henosis").setAttribute('cx', windowWidth/2);
+  document.getElementById("henosis").setAttribute('cy', windowHeight/2);
+  changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
+
+}
+
+function start()
+{
+
+  displayNone();
+  setHenosisAtCentre();
+
+}
+
+start();
+
+// Code used for start up -- end
+
+// Code used for dragging -- start
+
+$( function() {
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+  $('#henosis').draggable({
+    containment: [ 0, 0, windowWidth-40, windowHeight-40]
+  })
+  .bind('mousedown', function(event, ui){
+    // bring target to front
+    $(event.target.parentElement).append( event.target );
+  }).bind('drag', function(event, ui){
+
+    var ua = navigator.userAgent.toLowerCase();
+    var isChromium = ua.indexOf("chromium") > -1; //&& ua.indexOf("mobile");
+
+    if(isChromium)
+    {
+
+      var leftPosition = ui.position.left + 20;
+      var topPosition = ui.position.top + 20;
+
+    }
+    else
+    {
+
+      var leftPosition = ui.position.left+(windowWidth/2);
+      var topPosition = ui.position.top+(windowHeight/2);
+
+    }
+
+    // update coordinates manually, since top/left style props don't work on SVG
+    event.target.setAttribute('cx', leftPosition);
+    event.target.setAttribute('cy', topPosition);
+    changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
+
+  });
+} );
+
+// Code used for dragging -- end
+
+// Code used for page refresh -- start
+// Move to a better containment when possible.
+
+// See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
+//refresh page on browser resize
+$(window).bind('resize', function(e)
+{
+  if (window.RT) clearTimeout(window.RT);
+  window.RT = setTimeout(function()
+  {
+    this.location.reload(false); /* false to get page from cache */
+  }, 200);
+});
+
+// Code used for page refresh -- end
+
+// Code for scaleUpAct and for switching containers -- start
+
 var svgNS = "http://www.w3.org/2000/svg";
 var displayNow = 0;
 var possibleDisplays = 2;
@@ -25,15 +117,6 @@ function createActCircleShadow(cx, cy)
   myCircle.setAttributeNS(null,"fill","grey");
   myCircle.setAttributeNS(null,"stroke","none");
   document.getElementById("henosisLayer").appendChild(myCircle);
-}
-
-function setHenosisAtCentre()
-{
-  var windowHeight = $(window).height();
-  var windowWidth = $(window).width();
-  document.getElementById("henosis").setAttribute('cx', windowWidth/2);
-  document.getElementById("henosis").setAttribute('cy', windowHeight/2);
-  changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
 }
 
 function displayToggle()
@@ -69,10 +152,16 @@ function reduceOpacity()
     else
     {
       document.getElementById("actCircle").remove();
-      if (document.getElementById("henosis").addEventListener) {  // all browsers except IE before version 9
+      if (document.getElementById("henosis").addEventListener)
+      {
+        // all browsers except IE before version 9
         document.getElementById("henosis").addEventListener("click", henosisScaleUpActStart, false);
-      } else {
-        if (document.getElementById("henosis").attachEvent) {   // IE before version 9
+      }
+      else
+      {
+        if (document.getElementById("henosis").attachEvent)
+        {
+          // IE before version 9
           document.getElementById("henosis").attachEvent("click", henosisScaleUpActStart);
         }
       }
@@ -95,7 +184,7 @@ function henosisActCircleScaleUpAct(maxValue)
     var windowWidth = $(window).width();
     if(radius<maxValue)
     {
-      document.getElementById("actCircle").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/30));
+      document.getElementById("actCircle").setAttribute('r', parseFloat(radius)+parseFloat(maxValue/15));
       changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "actCircle", "actCircleShadow");
       henosisActCircleScaleUpAct(maxValue);
     }
@@ -119,54 +208,13 @@ function henosisScaleUpActStart()
   henosisActCircleScaleUpAct(diagonalLength);
 }
 
-function displayNone()
-{
-  document.getElementById("container1").style.display = "none";
-  document.getElementById("container2").style.display = "none";
-}
-
-function start(){
-  displayNone();
-  setHenosisAtCentre();
-}
-
-// See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
-//refresh page on browser resize
-$(window).bind('resize', function(e)
-{
-  if (window.RT) clearTimeout(window.RT);
-  window.RT = setTimeout(function()
-  {
-    this.location.reload(false); /* false to get page from cache */
-  }, 200);
-});
-
-
-$( function() {
-  var windowHeight = $(window).height();
-  var windowWidth = $(window).width();
-  $('#henosis').draggable({
-    containment: [ 0, 0, windowWidth-40, windowHeight-40]
-  })
-  .bind('mousedown', function(event, ui){
-    // bring target to front
-    $(event.target.parentElement).append( event.target );
-  }).bind('drag', function(event, ui){
-    var leftPosition = ui.position.left+(windowWidth/2);
-    var topPosition = ui.position.top+(windowHeight/2);
-    // update coordinates manually, since top/left style props don't work on SVG
-    event.target.setAttribute('cx', leftPosition);
-    event.target.setAttribute('cy', topPosition);
-    changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
-  });
-} );
+// Code for scaleUpAct and for switching containers -- end
 
 // pageloading part -- start
 var colors = new Array( "Violet", "Indigo", "Blue", "Green", "Yellow", "Orange", "Red");
 var colornow=1;
 var loopStop=0;
 function changeBackground(color) {
-  //  document.body.style.background = color;
   document.getElementById("henosis").setAttribute('fill', color);
 }
 
@@ -204,5 +252,3 @@ $(window).on('load', function()
   loopStop=1;
 });
 // pageloaded -- end
-
-start();
