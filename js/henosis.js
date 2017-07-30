@@ -3,7 +3,9 @@
 var svgNS = "http://www.w3.org/2000/svg";
 var displayNow = 0;
 var possibleDisplays = 2;
+var pageLoaded = 0;
 
+// Some global variables are declared within the pageloading part of the code.
 // Global Variables Declaration -- end
 
 // Code used for start up -- start
@@ -178,6 +180,11 @@ function reduceOpacity()
 function scaleUpActComplete()
 {
   document.getElementById("actCircleShadow").remove();
+  if(pageLoaded==0)
+  {
+    document.getElementById("henosisLayer").style.background="none";
+    pageLoaded=1;
+  }
   displayToggle();
   reduceOpacity();
 }
