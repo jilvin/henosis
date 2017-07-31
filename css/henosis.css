@@ -9,6 +9,12 @@
   /*Remove margin style definition if Bootstrap is used. -- end*/
   z-index: 10;
   background: white;
+  pointer-events: none;
+}
+
+#henosis
+{
+  pointer-events: visibleFill;
 }
 
 #container1, #container2
