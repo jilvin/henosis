@@ -29,12 +29,25 @@ function setHenosisAtCentre()
 
 }
 
+function henosisLayerFix()
+{
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+  document.getElementById("henosisLayer").style.height = windowHeight;
+  document.getElementById("henosisLayer").style.width = windowWidth;
+}
+
 function start()
 {
+  var ua = navigator.userAgent.toLowerCase();
+  var isAndroid = ua.indexOf("android") > -1;
 
   displayNone();
   setHenosisAtCentre();
-
+  if(isAndroid)
+  {
+    henosisLayerFix();
+  }
 }
 
 start();
