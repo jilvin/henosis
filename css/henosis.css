@@ -12,7 +12,7 @@
   pointer-events: none;
 }
 
-#henosis
+#henosis, #actCircle, #actCircleShadow
 {
   pointer-events: visibleFill;
 }

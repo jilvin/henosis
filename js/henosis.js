@@ -12,21 +12,17 @@ var pageLoaded = 0;
 
 function displayNone()
 {
-
   document.getElementById("container1").style.display = "none";
   document.getElementById("container2").style.display = "none";
-
 }
 
 function setHenosisAtCentre()
 {
-
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
   document.getElementById("henosis").setAttribute('cx', windowWidth/2);
   document.getElementById("henosis").setAttribute('cy', windowHeight/2);
   changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
-
 }
 
 function henosisLayerFix()
@@ -166,7 +162,7 @@ function reduceOpacity()
     var opacity = document.getElementById("actCircle").style.opacity;
     if(opacity>0)
     {
-      document.getElementById("actCircle").style.opacity = (parseFloat(opacity)-parseFloat(0.1));
+      document.getElementById("actCircle").style.opacity = (parseFloat(opacity)-parseFloat(0.2));
       reduceOpacity();
     }
     else
@@ -187,7 +183,7 @@ function reduceOpacity()
         }
       }
     }
-  }, 100);
+  }, 50);
 }
 
 function scaleUpActComplete()
