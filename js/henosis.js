@@ -11,14 +11,22 @@ var displayNow, possibleContainers, containerRotationMode;
 
 function displayNone()
 {
-  document.getElementById("container1").style.display = "none";
-  document.getElementById("container2").style.display = "none";
+  var i;
+  // looping all possible containers
+  for(i = 0; i < possibleContainers; i++)
+  {
+    document.getElementById("container"+i).style.display = "none";
+  }
 }
 
 function visibilityHidden()
 {
-  document.getElementById("container1").style.visibility = "hidden";
-  document.getElementById("container2").style.visibility = "hidden";
+  var i;
+  // looping all possible containers
+  for(i = 0; i < possibleContainers; i++)
+  {
+    document.getElementById("container"+i).style.visibility = "hidden";
+  }
 }
 
 function setHenosisAtCentre()
