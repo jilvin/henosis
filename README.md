@@ -6,27 +6,31 @@ See:
 https://jilvin.github.io/henosis/
 
 ## Usage
-Remove or comment margin style definition from henosis.css if Bootstrap is used.
+Note: Remove or comment margin style definition from henosis.css if Bootstrap is used.
+
+Initialization
 
 henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
 
-1) displayNowParameter
+* displayNowParameter
 
-Set the initial displayNow container.
+  * Set the initial displayNow container.
 
-Values: INTEGER.
+  * Values: INTEGER.
 
-2) possibleContainersParameter
+* possibleContainersParameter
 
-Set the number of containers you would like to have in the website.
+  * Set the number of containers you would like to have in the website.
 
-Values: INTEGER.
+  * Values: INTEGER.
 
-3) containerRotationModeParameter
+* containerRotationModeParameter
 
-Set the mode of operation for container rotation below.
+  * Set the mode of operation for container rotation below.
 
-Values: "display", "visibility";
+  * Values: "display", "visibility";
+  
+Do not forget to call this function. Else henosis won't work.
 
 ## Contribution
 Contributions and suggestions are always welcome.
