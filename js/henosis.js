@@ -2,7 +2,8 @@
 
 var svgNS = "http://www.w3.org/2000/svg";
 var pageLoaded = 0;
-var displayNow, possibleContainers, containerRotationMode;
+var displayNow = 0;
+var possibleContainers, containerRotationMode;
 
 // Some global variables are declared within the pageloading part of the code.
 // Global Variables Declaration -- end
@@ -13,7 +14,7 @@ function displayNone()
 {
   var i;
   // looping all possible containers
-  for(i = 0; i < possibleContainers; i++)
+  for(i = 1; i <= possibleContainers; i++)
   {
     document.getElementById("container"+i).style.display = "none";
   }
@@ -23,7 +24,7 @@ function visibilityHidden()
 {
   var i;
   // looping all possible containers
-  for(i = 0; i < possibleContainers; i++)
+  for(i = 1; i <= possibleContainers; i++)
   {
     document.getElementById("container"+i).style.visibility = "hidden";
   }
@@ -327,15 +328,11 @@ $(window).on('load', function()
 //
 //  henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
 //
-//  1) displayNowParameter
-//      Set the initial displayNow container.
-//      Values: INTEGER.
-//
-//  2) possibleContainersParameter
+//  1) possibleContainersParameter
 //      Set the number of containers you would like to have in the website.
 //      Values: INTEGER.
 //
-//  3) containerRotationModeParameter
+//  2) containerRotationModeParameter
 //      Set the mode of operation for container rotation below.
 //      Values: "display", "visibility";
 //
