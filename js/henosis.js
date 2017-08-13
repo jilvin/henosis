@@ -1,9 +1,8 @@
 // Global Variables Declaration -- start
 
 var svgNS = "http://www.w3.org/2000/svg";
-var displayNow = 0;
-var possibleDisplays = 2;
 var pageLoaded = 0;
+var displayNow, possibleContainers, containerRotationMode;
 
 // Some global variables are declared within the pageloading part of the code.
 // Global Variables Declaration -- end
@@ -14,6 +13,12 @@ function displayNone()
 {
   document.getElementById("container1").style.display = "none";
   document.getElementById("container2").style.display = "none";
+}
+
+function visibilityHidden()
+{
+  document.getElementById("container1").style.visibility = "hidden";
+  document.getElementById("container2").style.visibility = "hidden";
 }
 
 function setHenosisAtCentre()
@@ -38,7 +43,19 @@ function start()
   var ua = navigator.userAgent.toLowerCase();
   var isAndroid = ua.indexOf("android") > -1;
 
-  displayNone();
+  if(containerRotationMode == "display")
+  {
+    displayNone();
+  }
+  else if(containerRotationMode == "visibility")
+  {
+    visibilityHidden();
+  }
+  else
+  {
+    console.log("Error: Unsupported containerRotationMode!");
+  }
+
   setHenosisAtCentre();
   if(isAndroid)
   {
@@ -46,7 +63,7 @@ function start()
   }
 }
 
-start();
+// start();
 
 // Code used for start up -- end
 
@@ -137,22 +154,45 @@ function createActCircleShadow(cx, cy)
 
 function displayToggle()
 {
-  if(displayNow==0)
+  if(containerRotationMode == "display")
   {
-    displayNow++;
-    document.getElementById("container"+displayNow).style.display = "block";
+    if(displayNow==0)
+    {
+      displayNow++;
+      document.getElementById("container"+displayNow).style.display = "block";
+    }
+    else if(displayNow == possibleContainers)
+    {
+      document.getElementById("container"+displayNow).style.display = "none";
+      displayNow = 1;
+      document.getElementById("container"+displayNow).style.display = "block";
+    }
+    else
+    {
+      document.getElementById("container"+displayNow).style.display = "none";
+      displayNow++;
+      document.getElementById("container"+displayNow).style.display = "block";
+    }
   }
-  else if(displayNow == possibleDisplays)
+  else if(containerRotationMode == "visibility")
   {
-    document.getElementById("container"+displayNow).style.display = "none";
-    displayNow = 1;
-    document.getElementById("container"+displayNow).style.display = "block";
-  }
-  else
-  {
-    document.getElementById("container"+displayNow).style.display = "none";
-    displayNow++;
-    document.getElementById("container"+displayNow).style.display = "block";
+    if(displayNow==0)
+    {
+      displayNow++;
+      document.getElementById("container"+displayNow).style.visibility = "visible";
+    }
+    else if(displayNow == possibleContainers)
+    {
+      document.getElementById("container"+displayNow).style.visibility = "hidden";
+      displayNow = 1;
+      document.getElementById("container"+displayNow).style.visibility = "visible";
+    }
+    else
+    {
+      document.getElementById("container"+displayNow).style.visibility = "hidden";
+      displayNow++;
+      document.getElementById("container"+displayNow).style.visibility = "visible";
+    }
   }
 }
 
@@ -265,7 +305,7 @@ function loopLi() {
   }, 1000);
 }
 
-loopLi();
+// loopLi();
 // pageloading part -- end
 
 // pageloaded -- start
@@ -274,3 +314,34 @@ $(window).on('load', function()
   loopStop=1;
 });
 // pageloaded -- end
+
+// henosis initialization function - usage help -- start
+//
+//  henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
+//
+//  1) displayNowParameter
+//      Set the initial displayNow container.
+//      Values: INTEGER.
+//
+//  2) possibleContainersParameter
+//      Set the number of containers you would like to have in the website.
+//      Values: INTEGER.
+//
+//  3) containerRotationModeParameter
+//      Set the mode of operation for container rotation below.
+//      Values: "display", "visibility";
+//
+// henosis initialization function - usage help -- end
+
+// Code for henosis initialization function -- start
+
+function henosisInit(displayNowParameter = 0, possibleContainersParameter = 2, containerRotationModeParameter = "display")
+{
+  displayNow = displayNowParameter;
+  possibleContainers = possibleContainersParameter;
+  containerRotationMode = containerRotationModeParameter;
+  start();
+  loopLi();
+}
+
+// Code for henosis initialization function -- end
