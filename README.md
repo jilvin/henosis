@@ -5,10 +5,10 @@ See:
 
 https://jilvin.github.io/henosis/
 
-## Usage
-Note: Remove or comment margin style definition from henosis.css if Bootstrap is used.
+## Note
+Remove or comment margin style definition from henosis.css if Bootstrap is used.
 
-Initialization
+## Initialization
 
 henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
 
