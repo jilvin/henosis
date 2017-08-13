@@ -340,9 +340,8 @@ $(window).on('load', function()
 
 // Code for henosis initialization function -- start
 
-function henosisInit(displayNowParameter = 0, possibleContainersParameter = 2, containerRotationModeParameter = "display")
+function henosisInit(possibleContainersParameter = 2, containerRotationModeParameter = "display")
 {
-  displayNow = displayNowParameter;
   possibleContainers = possibleContainersParameter;
   containerRotationMode = containerRotationModeParameter;
   start();
