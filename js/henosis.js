@@ -43,8 +43,8 @@ function henosisLayerFix()
 {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
-  document.getElementById("henosisLayer").style.height = windowHeight;
-  document.getElementById("henosisLayer").style.width = windowWidth;
+  document.getElementById("henosisLayer").style.height = windowHeight+"px";
+  document.getElementById("henosisLayer").style.width = windowWidth+"px";
 }
 
 function start()
