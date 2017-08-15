@@ -30,6 +30,32 @@ function visibilityHidden()
   }
 }
 
+function setHenosisAt(cx, cy)
+{
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+  document.getElementById("henosis").setAttribute('cx', cx);
+  document.getElementById("henosis").setAttribute('cy', cy);
+  changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
+
+  var ua = navigator.userAgent.toLowerCase();
+  var isAppleWebKit = ua.indexOf("applewebkit") > -1;
+
+  if(isAppleWebKit)
+  {
+    var leftPosition = cx - 20;
+    var topPosition = cy - 20;
+  }
+  else
+  {
+    var leftPosition = cx-(windowWidth/2);
+    var topPosition = cy-(windowHeight/2);
+  }
+
+  document.getElementById("henosis").style.left = leftPosition+"px";
+  document.getElementById("henosis").style.top = topPosition+"px";
+}
+
 function setHenosisAtCentre()
 {
   var windowHeight = $(window).height();
@@ -47,7 +73,7 @@ function henosisLayerFix()
   document.getElementById("henosisLayer").style.width = windowWidth+"px";
 }
 
-function start()
+function start(cx = "NULL", cy = "NULL")
 {
   var ua = navigator.userAgent.toLowerCase();
   var isAndroid = ua.indexOf("android") > -1;
@@ -65,7 +91,15 @@ function start()
     console.log("Error: Unsupported containerRotationMode!");
   }
 
-  setHenosisAtCentre();
+  if(cx != "NULL" && cy != "NULL")
+  {
+    setHenosisAt(cx, cy);
+  }
+  else
+  {
+    setHenosisAtCentre();
+  }
+
   if(isAndroid)
   {
     henosisLayerFix();
@@ -326,7 +360,7 @@ $(window).on('load', function()
 
 // henosis initialization function - usage help -- start
 //
-//  henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
+//  henosisInit(possibleContainersParameter, containerRotationModeParameter, cx, cy);
 //
 //  1) possibleContainersParameter
 //      Set the number of containers you would like to have in the website.
@@ -336,15 +370,23 @@ $(window).on('load', function()
 //      Set the mode of operation for container rotation below.
 //      Values: "display", "visibility";
 //
+//  3) cx
+//      Set the initial cx coordinate for henosis.
+//      Values: Range(20, (viewportWidth-20));
+//
+//  4) cy
+//      Set the initial cy coordinate for henosis.
+//      Values: Range(20, (viewportHeight-20));
+//
 // henosis initialization function - usage help -- end
 
 // Code for henosis initialization function -- start
 
-function henosisInit(possibleContainersParameter = 2, containerRotationModeParameter = "display")
+function henosisInit(possibleContainersParameter = 2, containerRotationModeParameter = "display", cx = "NULL", cy = "NULL")
 {
   possibleContainers = possibleContainersParameter;
   containerRotationMode = containerRotationModeParameter;
-  start();
+  start(cx, cy);
   loopLi();
 }
 

@@ -33,7 +33,7 @@
   <script>
   // henosis initialization function - usage help -- start
   //
-  //  henosisInit(displayNowParameter, possibleContainersParameter, containerRotationModeParameter);
+  //  henosisInit(possibleContainersParameter, containerRotationModeParameter, cx, cy);
   //
   //  1) possibleContainersParameter
   //      Set the number of containers you would like to have in the website.
@@ -43,10 +43,24 @@
   //      Set the mode of operation for container rotation below.
   //      Values: "display", "visibility";
   //
+  //  3) cx
+  //      Set the initial cx coordinate for henosis.
+  //      Values: Range(20, (viewportWidth-20));
+  //
+  //  4) cy
+  //      Set the initial cy coordinate for henosis.
+  //      Values: Range(20, (viewportHeight-20));
+  //
   // henosis initialization function - usage help -- end
 
   // Initializing henosis with default parameters.
   henosisInit();
+
+  // Passing parameters - example -- start
+  // var windowHeight = $(window).height();
+  // var windowWidth = $(window).width();
+  // henosisInit(2, "display", 20, 20);
+  // Passing parameters - example -- end
   </script>
 </body>
 </html>
