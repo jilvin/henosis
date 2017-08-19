@@ -21,5 +21,5 @@
 {
   /*display: none; use if you are using display mode*/
   /*visibility: hidden; use if you are using visibility mode*/
-  overflow: scroll;
+  overflow: auto;
 }
