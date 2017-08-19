@@ -17,7 +17,9 @@
   pointer-events: visibleFill;
 }
 
-/*#container1, #container2
+#container1, #container2
 {
-  display: none;
-}*/
+  /*display: none; use if you are using display mode*/
+  /*visibility: hidden; use if you are using visibility mode*/
+  overflow: scroll;
+}
