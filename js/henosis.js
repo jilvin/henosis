@@ -153,19 +153,38 @@ $( function() {
 // Code used for dragging -- end
 
 // Code used for page refresh -- start
-// Move to a better containment when possible.
-
-// See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
-//refresh page on browser resize
-$(window).bind('resize', function(e)
+function resizeSetting()
 {
-  if (window.RT) clearTimeout(window.RT);
-  window.RT = setTimeout(function()
-  {
-    this.location.reload(false); /* false to get page from cache */
-  }, 200);
-});
+  // Move to a better containment when possible.
 
+  var ua = navigator.userAgent.toLowerCase();
+  var isAndroid = ua.indexOf("android") > -1;
+
+  if(isAndroid)
+  {
+    $(window).bind('orientationchange', function(e)
+    {
+      if (window.RT) clearTimeout(window.RT);
+      window.RT = setTimeout(function()
+      {
+        this.location.reload(false); /* false to get page from cache */
+      }, 200);
+    });
+  }
+  else
+  {
+    // See: https://www.sitepoint.com/jquery-refresh-page-browser-resize/
+    //refresh page on browser resize
+    $(window).bind('resize', function(e)
+    {
+      if (window.RT) clearTimeout(window.RT);
+      window.RT = setTimeout(function()
+      {
+        this.location.reload(false); /* false to get page from cache */
+      }, 200);
+    });
+  }
+}
 // Code used for page refresh -- end
 
 // Code for scaleUpAct and for switching containers -- start
@@ -388,6 +407,7 @@ function henosisInit(possibleContainersParameter = 2, containerRotationModeParam
   containerRotationMode = containerRotationModeParameter;
   start(cx, cy);
   loopLi();
+  resizeSetting();
 }
 
 // Code for henosis initialization function -- end
