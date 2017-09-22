@@ -34,6 +34,7 @@ function setHenosisAt(cx, cy)
 {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
+  console.log(windowHeight);
   document.getElementById("henosis").setAttribute('cx', cx);
   document.getElementById("henosis").setAttribute('cy', cy);
   changeShadowOfSVGElement((windowWidth/2), (windowHeight/2), 1, 0.005, "henosis", "shadow");
@@ -93,7 +94,9 @@ function start(cx = "NULL", cy = "NULL")
 
   if(cx != "NULL" && cy != "NULL")
   {
+
     setHenosisAt(cx, cy);
+
   }
   else
   {
@@ -123,23 +126,17 @@ $( function() {
   //   $(event.target.parentElement).append( event.target );
   // })
   .bind('drag', function(event, ui){
-
     var ua = navigator.userAgent.toLowerCase();
-    var isAppleWebKit = ua.indexOf("applewebkit") > -1;
-
+    var isAppleWebKit = (ua.indexOf('safari') > -1) && ua.indexOf('chrome') == -1;
     if(isAppleWebKit)
     {
-
-      var leftPosition = ui.position.left + 20;
-      var topPosition = ui.position.top + 20;
-
+      var leftPosition = event.pageX; // event.pageX gives the  mouse position relative to the left edge of the document.
+      var topPosition = event.pageY; // event.pageY gives the  mouse position relative to the right edge of the document.
     }
     else
     {
-
-      var leftPosition = ui.position.left+(windowWidth/2);
-      var topPosition = ui.position.top+(windowHeight/2);
-
+      var leftPosition = ui.position.left;
+      var topPosition = ui.position.top;
     }
 
     // update coordinates manually, since top/left style props don't work on SVG
