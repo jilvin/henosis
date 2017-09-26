@@ -124,11 +124,37 @@ $( function() {
   // })
   .bind('drag', function(event, ui){
     var ua = navigator.userAgent.toLowerCase();
-    var isAppleWebKit = ua.indexOf("applewebkit") > -1;
-    if(isAppleWebKit)
+    var isAppleWebKit = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+    var isSafari = /safari/.test(navigator.userAgent.toLowerCase());
+
+    if(isSafari && !isAppleWebKit)
     {
       var leftPosition = event.pageX; // event.pageX gives the  mouse position relative to the left edge of the document.
       var topPosition = event.pageY; // event.pageY gives the  mouse position relative to the right edge of the document.
+
+      // contain the henosis within the window's dimensions
+      if(leftPosition < 20)
+      {
+        leftPosition = 20;
+      }
+      if(leftPosition > windowWidth - 20)
+      {
+        leftPosition = windowWidth - 20;
+      }
+
+      if(topPosition < 20)
+      {
+        topPosition = 20;
+      }
+      if(topPosition > windowHeight - 20)
+      {
+        topPosition = windowHeight - 20;
+      }
+    }
+    else if(isAppleWebKit)
+    {
+      var leftPosition = ui.position.left + 20;
+      var topPosition = ui.position.top + 20;
     }
     else
     {
