@@ -1,3 +1,11 @@
+// Change Shadow of SVG Element
+//
+// License: MIT License
+//
+// Copyright (c) 2017 Jilvin Jacob
+//
+// Source: https://github.com/jilvin/changeShadowOfSVGElement
+
 //changeShadowOfSVGElement(int x1, int y1, int z1, int z2, string element1Identifier, string element2Identifier);
 //x1, y1, z1 - coordinates of the light source.
 //z2 - plane of the screen.

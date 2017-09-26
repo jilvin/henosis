@@ -1,3 +1,11 @@
+// Henosis JS
+//
+// License: MIT License
+//
+// Copyright (c) 2017 Jilvin Jacob
+//
+// Source: https://github.com/jilvin/henosis
+
 // Global Variables Declaration -- start
 
 var svgNS = "http://www.w3.org/2000/svg";
