@@ -131,7 +131,7 @@ $( function() {
     var isSafari = ua.indexOf("safari") > -1;
     // var isSafari = /safari/.test(navigator.userAgent.toLowerCase());
 
-    if(isSafari && !isAppleWebKit)
+    if(isSafari)
     {
       var leftPosition = event.pageX; // event.pageX gives the  mouse position relative to the left edge of the document.
       var topPosition = event.pageY; // event.pageY gives the  mouse position relative to the right edge of the document.
