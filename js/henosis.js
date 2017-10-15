@@ -124,8 +124,12 @@ $( function() {
   // })
   .bind('drag', function(event, ui){
     var ua = navigator.userAgent.toLowerCase();
-    var isAppleWebKit = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
-    var isSafari = /safari/.test(navigator.userAgent.toLowerCase());
+    
+    var isAppleWebKit = ua.indexOf("applewebkit") > -1;
+    // var isAppleWebKit = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+    
+    var isSafari = ua.indexOf("safari") > -1;
+    // var isSafari = /safari/.test(navigator.userAgent.toLowerCase());
 
     if(isSafari && !isAppleWebKit)
     {
