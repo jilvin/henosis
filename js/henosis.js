@@ -131,23 +131,47 @@ $( function() {
   //   $(event.target.parentElement).append( event.target );
   // })
   .bind('drag', function(event, ui){
-
     var ua = navigator.userAgent.toLowerCase();
+    
     var isAppleWebKit = ua.indexOf("applewebkit") > -1;
+    // var isAppleWebKit = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+    
+    var isSafari = ua.indexOf("safari") > -1;
+    // var isSafari = /safari/.test(navigator.userAgent.toLowerCase());
 
-    if(isAppleWebKit)
+    if(isSafari)
     {
+      var leftPosition = event.pageX; // event.pageX gives the  mouse position relative to the left edge of the document.
+      var topPosition = event.pageY; // event.pageY gives the  mouse position relative to the right edge of the document.
 
+      // contain the henosis within the window's dimensions
+      if(leftPosition < 20)
+      {
+        leftPosition = 20;
+      }
+      if(leftPosition > windowWidth - 20)
+      {
+        leftPosition = windowWidth - 20;
+      }
+
+      if(topPosition < 20)
+      {
+        topPosition = 20;
+      }
+      if(topPosition > windowHeight - 20)
+      {
+        topPosition = windowHeight - 20;
+      }
+    }
+    else if(isAppleWebKit)
+    {
       var leftPosition = ui.position.left + 20;
       var topPosition = ui.position.top + 20;
-
     }
     else
     {
-
       var leftPosition = ui.position.left+(windowWidth/2);
       var topPosition = ui.position.top+(windowHeight/2);
-
     }
 
     // update coordinates manually, since top/left style props don't work on SVG
