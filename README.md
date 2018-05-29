@@ -1,4 +1,7 @@
 # henosis
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a47a77597fcc4c22b1e944bc45d1456f)](https://app.codacy.com/app/jilvin/henosis?utm_source=github.com&utm_medium=referral&utm_content=jilvin/henosis&utm_campaign=badger)
+
 Simple preloader.
 
 See:
